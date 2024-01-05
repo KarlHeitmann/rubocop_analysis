@@ -18,14 +18,18 @@ module RubocopAnalysis
       puts "-------"
       puts @content["metadata"]
       puts
-      while true
+      loop do
         main_menu
         action = gets.chomp
         break if action == "q"
 
         if action == "1"
-          puts @content.keys
           puts @content["files"]
+        elsif action == "2"
+          filtered_files = @content["files"].select { _1["offenses"].any? }
+          # puts "#{filtered_files} # offenses: #{filte}"
+          puts(filtered_files.map { "#{_1["path"]} # offenses: #{_1["offenses"].count}" })
+          puts "\nTOTAL offended files: #{filtered_files.count}"
         end
       end
     end
@@ -35,7 +39,8 @@ module RubocopAnalysis
     def main_menu
       puts <<~MAIN_MENU
         Select an option:
-        (1) Show offended files
+        (1) Show all files
+        (2) Show offended files
         (q)uit
       MAIN_MENU
     end
