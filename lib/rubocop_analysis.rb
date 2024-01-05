@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "json"
+
 require_relative "rubocop_analysis/version"
 require_relative "rubocop_analysis/cli"
 

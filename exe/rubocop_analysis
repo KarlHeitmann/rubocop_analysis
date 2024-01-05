@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+$LOAD_PATH.unshift("#{__dir__}/../lib")
+
+require "rubocop_analysis"
+
+# mode = $stdin.stat.pipe?
+
+if $stdin.stat.pipe?
+  puts STDIN.each_line.to_a.map(&:strip)[0]
+else
+  cli = RubocopAnalysis::CLI.new
+  cli.run
+end
