@@ -8,28 +8,22 @@ module RubocopAnalysis
     def initialize
       @file_name = DEFAULT_FILE_PATH
       @content = JSON.parse(File.read(@file_name))
+      @result = RubocopAnalysis::Core.analyze(@content)
     end
 
     def run
-      puts "================================================================"
-      puts "Parsed '#{@file_name}' file successfully"
-      puts "-------"
-      puts @content["summary"]
-      puts "-------"
-      puts @content["metadata"]
-      puts
+      puts @result.header
       loop do
         main_menu
         action = gets.chomp
         break if action == "q"
 
         if action == "1"
-          puts @content["files"]
+          puts @result.nodes
         elsif action == "2"
-          filtered_files = @content["files"].select { _1["offenses"].any? }
-          # puts "#{filtered_files} # offenses: #{filte}"
-          puts(filtered_files.map { "#{_1["path"]} # offenses: #{_1["offenses"].count}" })
-          puts "\nTOTAL offended files: #{filtered_files.count}"
+          nodes = @result.filtered_nodes
+          puts nodes.map { "#{_1["path"]} # offenses: #{_1["offenses"].count}" }
+          puts "\nTOTAL offended files: #{nodes.count}"
         end
       end
     end
