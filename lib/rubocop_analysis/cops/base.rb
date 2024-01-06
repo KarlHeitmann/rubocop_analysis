@@ -3,7 +3,7 @@ module RubocopAnalysis
     class Base
       attr_reader :severity, :message, :cop_name, :corrected, :correctable, :location
 
-      def initialize(severity:, message:, cop_name:, corrected: , correctable:, location:)
+      def initialize(severity:, message:, cop_name:, corrected:, correctable:, location:)
         @severity = severity
         @message = message
         @cop_name = cop_name

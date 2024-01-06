@@ -1,12 +1,15 @@
 module RubocopAnalysis
   class Result
-    attr_reader :nodes, :filtered_nodes
+    attr_reader :nodes
 
     def initialize(data)
       @summary = data["summary"]
       @metada = data["metadata"]
       @nodes = data["files"].map { Node.new(_1) }
-      @filtered_nodes = @nodes.select { _1.offends? }
+    end
+
+    def filtered_nodes(klasses)
+      @nodes.select { _1.offends?(klasses) }
     end
 
     def header

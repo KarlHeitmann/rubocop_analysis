@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module RubocopAnalysis
   class Offense
     def self.offended_cop(data)
