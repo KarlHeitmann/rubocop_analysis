@@ -33,6 +33,7 @@ module RubocopAnalysis
         (2) Show offended files
         (3) View Offenses
         (q)uit
+        Filtered classes: #{@cops_filtered}
       MAIN_MENU
     end
 
@@ -69,7 +70,7 @@ module RubocopAnalysis
       choice = 0
       choice = gets.chomp.to_i until (choice.positive? && choice <= results.count)
       selected_class = results[choice - 1]
-      @cops_filtered << results[choice - 1] # TODO: Add toggle, if the choice made by user already is in @cops_filtered, remove it
+      @cops_filtered.include?(selected_class) ? @cops_filtered.delete(selected_class) : @cops_filtered << selected_class
     end
   end
 end
