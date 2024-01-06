@@ -19,10 +19,10 @@ module RubocopAnalysis
         break if action == "q"
 
         if action == "1"
-          puts @result.nodes
+          puts @result.nodes.map(&:as_hash)
         elsif action == "2"
           nodes = @result.filtered_nodes
-          puts nodes.map { "#{_1["path"]} # offenses: #{_1["offenses"].count}" }
+          puts nodes.map { "#{_1.path} # offenses: #{_1.offenses.count}" }
           puts "\nTOTAL offended files: #{nodes.count}"
         end
       end

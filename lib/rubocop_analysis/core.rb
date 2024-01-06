@@ -5,8 +5,8 @@ module RubocopAnalysis
     def initialize(data)
       @summary = data["summary"]
       @metada = data["metadata"]
-      @nodes = data["files"]
-      @filtered_nodes = @nodes.select { _1["offenses"].any? }
+      @nodes = data["files"].map { Node.new(_1) }
+      @filtered_nodes = @nodes.select { _1.offends? }
     end
 
     def header
