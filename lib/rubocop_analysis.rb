@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "json"
+require "rainbow"
 
 # rubocop:disable Lint/SuppressedException
 # This block is used to load development dependencies
