@@ -21,5 +21,15 @@ module RubocopAnalysis
     def as_hash
       { path: @path, offenses: @offenses }
     end
+
+    def show(indent = "")
+      # TODO: Use ERB here
+      <<~SHOW
+        #{indent}#{Rainbow(path).green}
+        #{indent}--------------------------
+        #{offenses.reduce("") { |acc, offense| acc + offense.show(indent) }
+        }
+      SHOW
+    end
   end
 end

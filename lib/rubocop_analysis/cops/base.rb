@@ -11,6 +11,10 @@ module RubocopAnalysis
         @correctable = correctable
         @location = location
       end
+
+      def show(_indent = "")
+        "TODO: Override me"
+      end
     end
   end
 end

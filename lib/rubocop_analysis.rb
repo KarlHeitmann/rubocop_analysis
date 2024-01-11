@@ -15,6 +15,7 @@ end
 require_relative "rubocop_analysis/version"
 
 require_relative "rubocop_analysis/cli"
+require_relative "rubocop_analysis/cli/show_offended_files"
 require_relative "rubocop_analysis/cops/base"
 require_relative "rubocop_analysis/cops/unknown"
 require_relative "rubocop_analysis/cops/metrics/method_length"
