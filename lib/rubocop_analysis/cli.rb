@@ -15,6 +15,26 @@ module RubocopAnalysis
     ACTION_MODE = "action_mode"
 
     def initialize
+      server_cli = RuboCop::Server::CLI.new
+      # It must have the --server flag in order to run with server
+      # binding.pry
+      # REFACTOR: maybe two lines below could use ternary? like:
+      # total_options = ARGV.include? "--server" ? ARGV : ARGV + "[--server"]
+      total_options = ARGV
+      total_options << "--server" unless ARGV.include? "--server"
+      exit_status = server_cli.run(argv = total_options)
+      # exit exit_status if server_cli.exit?
+
+      # This runs if rubocop server is running
+      if RuboCop::Server.running?
+        # Enjoy this breakpoint to run this command:
+        # > RuboCop::Server::ClientCommand::Foo.new.run
+        # and see the rubocop static analysis results on screen.
+        binding.pry
+        exit_status = RuboCop::Server::ClientCommand::Foo.new.run
+      end
+      exit exit_status
+
       @file_name = DEFAULT_FILE_PATH
       @content = JSON.parse(File.read(@file_name))
       @result = RubocopAnalysis::Core.analyze(@content)

@@ -2,6 +2,7 @@
 
 require "json"
 require "rainbow"
+require "rubocop/server"
 
 # rubocop:disable Lint/SuppressedException
 # This block is used to load development dependencies
@@ -11,6 +12,8 @@ begin
 rescue LoadError
 end
 # rubocop:enable Lint/SuppressedException
+
+require_relative "rubocop/server/client_command/foo"
 
 require_relative "rubocop_analysis/version"
 
